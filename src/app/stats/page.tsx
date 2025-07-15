@@ -64,7 +64,7 @@ export default function StatsPage() {
       // 차트 데이터 준비
       if (statsData.trend && statsData.trend.length > 0) {
         const labels = statsData.trend.map(reading => 
-          new Date(reading.recorded_at).toLocaleDateString('ko-KR', { 
+          new Date(reading.measured_at).toLocaleDateString('ko-KR', { 
             month: 'short', 
             day: 'numeric' 
           })
