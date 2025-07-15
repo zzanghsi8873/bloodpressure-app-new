@@ -1,0 +1,213 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 혈압 앱 다크 테마 CSS 변수 */
+:root {
+  --color-primary-500: #FF5400;
+  --color-primary-400: #FF5400CC;
+  --color-primary-600: #E64C00;
+  
+  --color-foreground: #FFFFFF;
+  --color-foreground-muted: #B3B3B3;
+  --color-background: #000000;
+  --color-background-secondary: #1A1A1A;
+  --color-border: #333333;
+  
+  --font-inter: 'Inter', system-ui, sans-serif;
+}
+
+/* 기본 HTML 요소 스타일링 */
+* {
+  border-color: var(--color-border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-inter);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 혈압 앱 전용 컴포넌트 스타일 */
+@layer components {
+  /* 기본 카드 스타일 */
+  .card {
+    @apply bg-neutral-800 border border-neutral-700 rounded-xl p-6 shadow-lg;
+  }
+
+  /* 기본 버튼 스타일 */
+  .btn-primary {
+    @apply bg-primary-500 text-neutral-900 font-bold py-3 px-6 rounded-md;
+    @apply hover:bg-primary-400 active:bg-primary-600;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-neutral-900;
+    @apply transition-colors duration-200;
+  }
+
+  .btn-secondary {
+    @apply bg-neutral-700 text-neutral-100 font-medium py-3 px-6 rounded-md;
+    @apply hover:bg-neutral-600 active:bg-neutral-800;
+    @apply focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 focus:ring-offset-neutral-900;
+    @apply transition-colors duration-200;
+  }
+
+  .btn-ghost {
+    @apply bg-transparent text-neutral-300 font-medium py-3 px-6 rounded-md;
+    @apply hover:bg-neutral-800 hover:text-neutral-100 active:bg-neutral-700;
+    @apply focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 focus:ring-offset-neutral-900;
+    @apply transition-colors duration-200;
+  }
+
+  /* 입력 필드 스타일 */
+  .input-field {
+    @apply bg-neutral-800 border border-neutral-700 rounded-md px-4 py-3;
+    @apply text-neutral-100 placeholder-neutral-400;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent;
+    @apply transition-colors duration-200;
+  }
+
+  /* 네비게이션 바 스타일 */
+  .nav-tab {
+    @apply flex flex-col items-center justify-center p-3 text-neutral-400;
+    @apply hover:text-neutral-200 active:text-primary-500;
+    @apply transition-colors duration-200;
+  }
+
+  .nav-tab.active {
+    @apply text-primary-500;
+  }
+
+  /* 혈압 상태별 색상 */
+  .bp-normal {
+    @apply text-bp-normal;
+  }
+
+  .bp-elevated {
+    @apply text-bp-elevated;
+  }
+
+  .bp-high {
+    @apply text-bp-high;
+  }
+
+  .bp-very-high {
+    @apply text-bp-very-high;
+  }
+
+  /* 그리드 레이아웃 */
+  .grid-mobile {
+    @apply grid grid-cols-mobile gap-4;
+  }
+
+  .grid-tablet {
+    @apply tablet:grid-cols-tablet;
+  }
+
+  .grid-desktop {
+    @apply desktop:grid-cols-desktop;
+  }
+
+  /* 모바일 모달/시트 스타일 */
+  .modal-backdrop {
+    @apply fixed inset-0 bg-black/80 z-50 flex items-end justify-center;
+    @apply tablet:items-center;
+  }
+
+  .modal-sheet {
+    @apply bg-neutral-900 rounded-t-3xl w-full max-w-md p-6 animate-slide-up;
+    @apply tablet:rounded-xl tablet:max-w-lg tablet:animate-scale-in;
+  }
+
+  /* 토스트 스타일 */
+  .toast {
+    @apply bg-neutral-800 border border-neutral-700 rounded-lg p-4 shadow-lg;
+    @apply text-neutral-100 animate-slide-down;
+  }
+
+  .toast-success {
+    @apply border-bp-normal;
+  }
+
+  .toast-error {
+    @apply border-bp-high;
+  }
+
+  .toast-warning {
+    @apply border-bp-elevated;
+  }
+}
+
+/* 스크롤바 스타일링 */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-foreground-muted);
+}
+
+/* 접근성 향상 */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 포커스 링 스타일 */
+.focus-visible {
+  @apply outline-none ring-2 ring-primary-500 ring-offset-2 ring-offset-neutral-900;
+}
+
+/* 혈압 수치 타이포그래피 */
+.bp-reading {
+  @apply text-display-md font-black tabular-nums;
+}
+
+.bp-label {
+  @apply text-body-sm text-neutral-400 uppercase tracking-wide;
+}
+
+/* 캘린더 커스텀 스타일 */
+.fc-theme-standard .fc-scrollgrid {
+  border: 1px solid var(--color-border);
+}
+
+.fc-theme-standard .fc-scrollgrid-section > td {
+  border: 1px solid var(--color-border);
+}
+
+.fc-theme-standard .fc-col-header-cell {
+  background-color: var(--color-background-secondary);
+  border-color: var(--color-border);
+}
+
+.fc-theme-standard .fc-daygrid-day {
+  background-color: var(--color-background);
+  border-color: var(--color-border);
+}
+
+.fc-theme-standard .fc-daygrid-day-number {
+  color: var(--color-foreground);
+}
+
+/* 차트 커스텀 스타일 */
+.chart-container {
+  @apply bg-neutral-800 border border-neutral-700 rounded-xl p-4;
+}
