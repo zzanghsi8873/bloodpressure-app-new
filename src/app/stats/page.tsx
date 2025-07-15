@@ -124,7 +124,6 @@ export default function StatsPage() {
         color: '#FFFFFF',
         font: {
           size: 16,
-          weight: 'bold',
         },
       },
       tooltip: {
